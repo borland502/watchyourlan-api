@@ -5,7 +5,7 @@
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 // import helmet from 'helmet';
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 // import cors from 'cors';
 
 import "express-async-errors";
@@ -51,7 +51,6 @@ app.use(
 		err: Error,
 		_: Request,
 		res: Response,
-		next: NextFunction,
 	) => {
 		let status = HttpStatusCodes.BAD_REQUEST;
 		if (err instanceof RouteError) {

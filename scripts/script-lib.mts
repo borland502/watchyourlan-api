@@ -100,15 +100,14 @@ export async function build_cmd(): Promise<ProcessOutput> {
 	const command: ProcessPromise = $`npx webpack --config ./webpack.config.js --entry ./src/index.mts --mode production`;
 	command.nothrow();
 	command.verbose(false);
-	return await command;
+	return command;
 }
 
 export async function lint_cmd(): Promise<ProcessOutput> {
-	const command: ProcessPromise = $`npx eslint@latest --ignore-pattern '**/build/**' \ 
---ignore-pattern '**/dist/**' \
---ignore-pattern '**/scripts/**' --ignore-pattern '**/coverage/**' --ignore-pattern '**/docker/**' \
-.`;
+	const command: ProcessPromise = $`npx eslint@latest --ignore-pattern '**/build/**' --ignore-pattern '**/dist/**' \
+	 --ignore-pattern '**/scripts/**' --ignore-pattern '**/coverage/**' --ignore-pattern '**/docker/**' **/*.mts .
+	 `;
 	command.nothrow();
 	command.verbose(false);
-	return await command;
+	return command;
 }

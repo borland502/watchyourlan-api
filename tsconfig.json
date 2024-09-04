@@ -74,8 +74,12 @@
 		},
 		"useUnknownInCatchVariables": false
 	},
-	"include": ["src/**/*.mts", "src/**/*.ts","spec/**/*.ts",
-		"build.mts"
-	],
+	"include": [
+      "src/**/*.mts",
+      "src/**/*.ts",
+      "spec/**/*.ts",
+      "build.mts",
+      "node_modules/zx/build/globals.d.ts"
+    ],
 	"exclude": ["src/public/","dist/**/*", "spec/**/*", "coverage/**/*"]
 }

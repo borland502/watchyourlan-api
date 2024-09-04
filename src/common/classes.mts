@@ -13,7 +13,7 @@ export class RouteError extends Error {
 }
 
 /**
- * If route validation fails.
+ * If route validation fails.Ï
  */
 export class ValidationErr extends RouteError {
 	public static MSG = 'The follow parameter were missing or invalid "';

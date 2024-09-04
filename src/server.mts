@@ -17,12 +17,13 @@ import HttpStatusCodes from "@src/common/HttpStatusCodes.mjs";
 import { RouteError } from "@src/common/classes.mjs";
 import paginate from "express-paginate";
 import cors from "cors";
+// @ts-expect-error This config library is intended for typescript, but errors at the moment
 import { config } from "node-config-ts";
 
 // **** Variables **** //
 
 const corsOptions = {
-	origin: ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:5174", "http://127.0.0.1:5174",],
+	origin: ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:5174", "http://127.0.0.1:5174", "http://localhost:3000/api/hosts/all"],
 	optionsSuccessStatus: 200,
 	methods: "GET",
 	allowedHeaders: ["Content-Range"],
@@ -50,12 +51,8 @@ app.use(
 		err: Error,
 		_: Request,
 		res: Response,
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		next: NextFunction,
 	) => {
-		// if (EnvVars.NodeEnv !== NodeEnvs.Test.valueOf()) {
-		//   logger.error(err, true);
-		// }
 		let status = HttpStatusCodes.BAD_REQUEST;
 		if (err instanceof RouteError) {
 			status = err.status;

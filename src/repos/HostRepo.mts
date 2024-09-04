@@ -67,19 +67,11 @@ async function findAndCountAll(limit: number, range: number[]) {
 }
 
 /**
- * Creates the necessary database tables if they don't exist.
- * This function uses the `sequelize.sync()` method to synchronize the database schema.
- */
-async function createTable() {
-	await sequelize.sync();
-}
-
-/**
  * Retrieves all records from the "now" table in the database.
  *
  * @returns A Promise that resolves to an array of objects, where each object represents a row from the "now" table.
  */
-async function getAll() {
+async function getAll(): Promise<Host[]> {
 	return await sequelize.query("SELECT * FROM `now`", {
 		type: QueryTypes.SELECT,
 	});
@@ -87,6 +79,5 @@ async function getAll() {
 
 export default {
 	getAll,
-	createTable,
 	findAndCountAll,
 } as const;

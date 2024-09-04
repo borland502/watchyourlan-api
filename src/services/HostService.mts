@@ -1,42 +1,39 @@
-import HostRepo from '@src/repos/HostRepo.mjs';
-import {Host} from '@src/models/Host.mjs';
+import HostRepo from "@src/repos/HostRepo.mjs";
+import { Host } from "@src/models/Host.mjs";
 
-function handleSuccess(res: Host[]) {
-    console.info(`Retrieved ${res.length} hosts`)
-    return res;
+export interface Hosts {
+	rows: Host[];
+	count: number;
 }
 
-// function handleFailure(err: Error) {
-//     console.error(err)
-//     // if (err.name === "SequelizeDatabaseError") {
-//     //     HostRepo.createTable().then(res => console.log(res))
-//     //     return HostRepo.getAll().then(handleSuccess, reason => {
-//     //         // To avoid recursion we don't try again
-//     //         console.error(reason)
-//     //         return err
-//     //     })
-//     // }
-//     return err
-// }
-//
-// function handleRecovery(err: Error) {
-//     return err
-// }
+function handleSuccess(res: Hosts) {
+	return res;
+}
 
 function handleFailure(reason: Error) {
-    console.error(reason)
-    return reason
+	console.error(reason);
+	return reason;
 }
 
 /**
  * Get all users.
  */
-async function getAll(): Promise<Host[] | Error> {
-    return await HostRepo.getAll().then(res => handleSuccess(res as Host[]), reason => handleFailure(reason))
+async function getAll(limit: number, range: number[]): Promise<Hosts | Error> {
+
+	if (limit > 0 || range[0] > 0) {
+		return await HostRepo.findAndCountAll(limit, range).then(
+			(res) => handleSuccess(res),
+			(reason) => handleFailure(reason),
+		);
+	}
+	return await HostRepo.findAndCountAll(500, range).then(
+		(res) => handleSuccess(res),
+		(reason) => handleFailure(reason),
+	);
 }
 
 // **** Export default **** //
 
 export default {
-    getAll,
+	getAll,
 } as const;

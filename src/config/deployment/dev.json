@@ -1,0 +1,9 @@
+{
+  "database": {
+    "db_file_name": "/data/db.sqlite",
+    "dialect": "sqlite"
+  },
+  "server": {
+    "port": 3000
+  }
+}

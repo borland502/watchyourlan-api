@@ -1,13 +1,11 @@
-import { Router } from 'express';
-import HostRoutes from '@src/routes/HostRoutes.mjs';
+import { Router } from "express";
+import HostRoutes from "@src/routes/HostRoutes.mjs";
 
-import Paths from '../common/Paths.mjs';
-
+import Paths from "../common/Paths.mjs";
 
 // **** Variables **** //
 
 const apiRouter = Router();
-
 
 // ** Add UserRouter ** //
 
@@ -19,7 +17,6 @@ hostRouter.get(Paths.Hosts.Get, HostRoutes.getAll);
 
 // Add HostRouter
 apiRouter.use(Paths.Hosts.Base, hostRouter);
-
 
 // **** Export default **** //
 

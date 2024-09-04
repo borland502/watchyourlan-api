@@ -1,38 +1,32 @@
-import {Table, Column, Model, DataType} from "sequelize-typescript";
+import { Table, Column, Model, DataType } from "sequelize-typescript";
 
 @Table
 export class Host extends Model {
-    @Column(DataType.INTEGER)
-    ID!: number;
+	@Column(DataType.INTEGER)
+	ID!: number;
 
-    @Column(DataType.STRING)
-    NAME!: string;
+	@Column(DataType.STRING)
+	NAME!: string;
 
-    @Column(DataType.STRING)
-    DNS!: string;
+	@Column(DataType.STRING)
+	IP?: string;
 
-    @Column(DataType.STRING)
-    IFACE!: string;
+	@Column(DataType.STRING)
+	MAC?: string;
 
-    @Column(DataType.STRING)
-    IP?: string;
+	@Column(DataType.STRING)
+	HW?: string;
 
-    @Column(DataType.STRING)
-    MAC?: string;
+	@Column(DataType.STRING)
+	DATE?: string;
 
-    @Column(DataType.STRING)
-    HW?: string;
+	@Column(DataType.INTEGER)
+	KNOWN?: number;
 
-    @Column(DataType.STRING)
-    DATE?: string;
-
-    @Column(DataType.INTEGER)
-    KNOWN?: number;
-
-    @Column(DataType.INTEGER)
-    NOW?: number;
+	@Column(DataType.INTEGER)
+	NOW?: number;
 }
 
 export default {
-    Host
+	Host,
 } as const;

@@ -1,32 +1,28 @@
-import HttpStatusCodes from '@src/common/HttpStatusCodes.mjs';
-
+import HttpStatusCodes from "@src/common/HttpStatusCodes.mjs";
 
 /**
  * Error with status code and message.
  */
 export class RouteError extends Error {
+	public status: HttpStatusCodes;
 
-  public status: HttpStatusCodes;
-
-  public constructor(status: HttpStatusCodes, message: string) {
-    super(message);
-    this.status = status;
-  }
+	public constructor(status: HttpStatusCodes, message: string) {
+		super(message);
+		this.status = status;
+	}
 }
 
 /**
  * If route validation fails.
  */
 export class ValidationErr extends RouteError {
+	public static MSG = 'The follow parameter were missing or invalid "';
 
-  public static MSG = 'The follow parameter were missing or invalid "';
+	public constructor(paramName: string) {
+		super(HttpStatusCodes.BAD_REQUEST, ValidationErr.GetMsg(paramName));
+	}
 
-  public constructor(paramName: string) {
-    super(HttpStatusCodes.BAD_REQUEST, ValidationErr.GetMsg(paramName));
-  }
-
-  public static GetMsg(param: string) {
-    return ValidationErr.MSG + param + '".';
-  }
+	public static GetMsg(param: string) {
+		return ValidationErr.MSG + param + '".';
+	}
 }
-

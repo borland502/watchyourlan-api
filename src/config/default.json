@@ -1,0 +1,12 @@
+{
+  "database": {
+    "db_file_name": "/data/db.sqlite",
+    "dialect": "sqlite"
+  },
+  "server": {
+    "port": 3000,
+    "maxQueryLimit": 500,
+    "defaultRange": [0,1],
+    "defaultResultsPerPage": 20
+  }
+}
